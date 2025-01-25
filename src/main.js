@@ -10,6 +10,17 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+//Plane
+const planeMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(20,20,),
+    new THREE.MeshBasicMaterial({
+        side: THREE.DoubleSide
+    })
+)
+
+planeMesh.rotateX(-Math.PI / 2);
+scene.add(planeMesh)
+
 // Object
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ color: 'purple' })
