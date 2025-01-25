@@ -14,12 +14,16 @@ const scene = new THREE.Scene()
 const planeMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(20,20,),
     new THREE.MeshBasicMaterial({
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
+        visible: false
     })
 )
 
 planeMesh.rotateX(-Math.PI / 2);
 scene.add(planeMesh)
+
+const grid = new THREE.GridHelper(20,20,)
+scene.add(grid)
 
 // Object
 const geometry = new THREE.BoxGeometry(1, 1, 1)
