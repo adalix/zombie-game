@@ -12,7 +12,7 @@ const scene = new THREE.Scene()
 
 //Plane
 const planeMesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(20,20,),
+    new THREE.PlaneGeometry(30,30,),
     new THREE.MeshBasicMaterial({
         side: THREE.DoubleSide,
         visible: false
@@ -22,14 +22,40 @@ const planeMesh = new THREE.Mesh(
 planeMesh.rotateX(-Math.PI / 2);
 scene.add(planeMesh)
 
-const grid = new THREE.GridHelper(20,20,)
+const grid = new THREE.GridHelper(30,30)
 scene.add(grid)
 
-// Object
+// Player
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ color: 'purple' })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
+
+//Zombie
+const zombieGeo = new THREE.BoxGeometry(1, 1, 1)
+const zombieMaterial = new THREE.MeshBasicMaterial({ color: 'brown' })
+const zombieMesh = new THREE.Mesh(zombieGeo, zombieMaterial)
+
+zombieMesh.position.set(10, 0, 10)
+
+scene.add(zombieMesh)
+
+// let zombieSpeed = 0.05
+
+function moveZombie(){
+    let x,y,z;
+    x = Math.floor(Math.random() * 15 + 1)
+    y = 0;
+    z = Math.floor(Math.random() * 15 + 1)
+
+    console.log(`${'x:' + x + ' y:' + y + ' z:' + z}`)
+
+    zombieMesh.position.set(x,y,z)
+
+
+}
+
+moveZombie()
 
 // Sizes
 const sizes = {
@@ -54,7 +80,8 @@ window.addEventListener('resize', () =>
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.z = 3
+camera.position.z = 16
+camera.position.y = 20
 scene.add(camera)
 
 // Controls
@@ -77,6 +104,7 @@ const tick = () =>
 
     // Update controls
     controls.update()
+    // moveZombie(1)
 
     // Render
     renderer.render(scene, camera)
